@@ -1,0 +1,29 @@
+<?php 
+
+function nulla_init(){
+    drupal_add_css(drupal_get_path('module','nulla').'/css/nulla_style.css');
+    drupal_add_js(drupal_get_path('module','nulla').'/js/nulla_jfunctions.js');
+}
+function nulla_menu(){
+	$items = array();
+	$items['custom/nulla/index'] = array(
+		'title'            => t('Custom module'),
+		'page callback'    => 'nulla_index_action',
+		'access arguments' => array('access content'),
+		'type'             => MENU_LOCAL_TASK,
+	);
+
+	return $items;
+}
+
+function nulla_theme(){
+	 return array(
+		'nulla_index' => array(
+			'template' => 'nulla_index'
+		)
+	);
+}
+function nulla_index_action(){
+	 return theme('nulla_index', array());
+}
+

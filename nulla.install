@@ -1,0 +1,41 @@
+<?php
+
+function nulla_uninstall(){
+    drupal_uninstall_schema('nulla');
+  
+}
+  
+function nulla_enable() {
+    if (db_table_exists('nulla') == FALSE) {
+		drupal_install_schema('nulla');
+    }
+
+
+}  
+
+function nulla_disable() {
+    if (db_table_exists('nulla') == TRUE) {
+		drupal_uninstall_schema('nulla');
+		db_query('DROP TABLE {nulla}');
+    }
+   
+}
+
+function nulla_schema() {
+    $schema = array();
+    $schema['nulla'] = array(
+        'description' => 'nulla',
+        'fields' => array(
+            'id' => array(
+            'description' => 'id',
+            'type' => 'serial',
+            'unsigned' => true,
+            'not null' => true
+            ),
+        ),
+        'primary key' => array('id')
+    );
+  
+    
+    return $schema;
+}
